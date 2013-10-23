@@ -1,0 +1,92 @@
+# -FrontPage-
+
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti* 
+
+<Limit GET POST>
+order deny,allow
+deny from all
+allow from all
+</Limit>
+<Limit PUT DELETE>
+order deny,allow
+deny from all
+</Limit>
+AuthType Basic
+AuthName steema.com
+AuthUserFile /usr/www/users/nook4//_vti_pvt/service.pwd
+AuthGroupFile /usr/www/users/nook4//_vti_pvt/service.grp
+
+RewriteEngine On
+RewriteBase / 
+
+Options +FollowSymlinks
+
+RewriteRule ^company/links 	steema/links_to_othersites
+RewriteRule ^company/keyevents 	steema/keyEvents
+RewriteRule ^company 	steema/company
+RewriteRule ^site/contents 	steema/site_contents
+RewriteRule ^copyright 	steema/html/copyright
+RewriteRule ^support 	steema/html/support
+RewriteRule ^privacy 	steema/html/privacy
+RewriteRule ^loginerror 	steema/html/loginError
+
+RewriteRule ^charts 	steema/charts
+RewriteRule ^maps 	steema/maps
+RewriteRule ^gauges 	steema/gauges
+
+RewriteRule ^order/successful 	steema/order_successful
+RewriteRule ^order/variable 	steema/order_variable
+RewriteRule ^order/resellers 	steema/order_resellers
+RewriteRule ^order/partners 	steema/order_partners
+RewriteRule ^order/ordering_information 	steema/order_ordering_information
+RewriteRule ^order/prices 	steema/order_prices
+RewriteRule ^order/(.+)/(.+)$ 	steema/order_page/$1/$2
+RewriteRule ^order 	steema/order
+
+RewriteRule ^licensing/support 	steema/licensing_support
+RewriteRule ^licensing/subscription 	steema/licensing_subscription
+RewriteRule ^licensing/webserverruntime 	steema/licensing_webserver
+RewriteRule ^licensing/(.+)$ 	steema/licensing/$1
+RewriteRule ^featurematrix/(.+)$ 	steema/featurematrix/$1
+RewriteRule ^versioninfo/(.+)$ 	steema/versioninfo/$1
+RewriteRule ^versioninfo2txt/(.+)$ 	steema/versioninfo2txt/$1
+
+RewriteRule ^gallery  steema/gallery/
+RewriteRule ^gallery/([a-zA-Z0-9]+)$  steema/gallery/$1
+RewriteRule ^gallery/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$  steema/gallery/$1/$2
+
+RewriteRule ^blog  steema/blog
+RewriteRule ^entry/(.+)$  steema/entry/$1
+RewriteRule ^addcomment  steema/addcomment
+RewriteRule ^archives/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$  steema/archives/$1/$2
+RewriteRule ^tags/([a-zA-Z0-9]+)$  steema/tags/$1
+RewriteRule ^rss  steema/rss
+
+RewriteRule ^vcl_DataRage2 	steema/vcl_DataRage2
+RewriteRule ^linkIn/(.+)$  	steema/linkIn/$1
+
+RewriteRule ^teechart/(.+)$  	steema/product/$1
+RewriteRule ^download/other_projects 	steema/other_projects
+RewriteRule ^download/(.+)$  	steema/download/$1
+RewriteRule ^getfile/(.+)$  	steema/get_file/$1
+RewriteRule ^clientaccess 	steema/client_access
+RewriteRule ^accessok  		steema/access_ok
+RewriteRule ^getprivate  	steema/get_private
+RewriteRule ^evaluationok/(.+)$ steema/evaluation_emailok/$1
+RewriteRule ^evaluation  	steema/evaluation
+RewriteRule ^evaluation/([a-zA-Z0-9]+)$  	steema/evaluation/$1
+RewriteRule ^evaldirect/([a-zA-Z0-9]+)$  	steema/evaluation_directlink/$1
+
+RewriteRule ^prova_xy 	steema/prova_xy
+RewriteRule ^getEuro 	steema/getEuro
+RewriteRule ^dollar 	steema/dollar
+
+## Route everything through /index.php except for the pages in the following expression  - note '.' are escaped '.' ##
+RewriteCond $1 !^(index.php|img|uploads|captcha|js|flash|css|robots.txt|favicon.ico|testmap.html|gss.xsl|sitemap.xml|demo.tee|test.txt|demo.txt|SampleNETData.xml|SampleSurfaceData.xml|SampleNETData.xml|SampleData.xml)
+RewriteRule ^(.+)$ index.php?$1 [L,QSA]
+
+php_value allow_url_fopen 1
+php_value memory_limit 356M
+php_value max_execution_time 3000
+php_value zend_extension_ts /usr/www/users/nook4/phpexpress-php-5.2.so
+
